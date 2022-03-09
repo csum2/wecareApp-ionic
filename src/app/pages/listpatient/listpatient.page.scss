@@ -1,0 +1,42 @@
+#container {
+  text-align: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 17em;
+  transform: translateY(-50%);
+}
+.item {
+  --ion-item-background: #e6e6e6;
+  color: #000000;
+  margin: 8px;
+}
+
+.list {
+  margin-top: 0%;
+  background-color: #f0f3f3;
+  vertical-align: top;
+}
+
+.searchbar {
+  margin-top: 20px;
+  --background: #ffffff;
+  --color: #000;
+  --border-radius: 55px !important;
+  border: 1px;
+  font-size: 14px;
+  width: 95%;
+}
+
+.squarebutton {
+  --background: #ffffff;
+  --background-focused: #673ab7;
+  --background-hover: #673ab7;
+  --color: #000;
+  --color-activated: #000;
+  --color-focused: #000;
+  --vertical-align: middle;
+  text-transform: none;
+  font-size: 14px;
+  margin-right: 2%;
+}

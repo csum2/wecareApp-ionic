@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Check {{ mode }} patients</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-searchbar class="searchbar" placeholder="Search" [(ngModel)]="nameFilter" animated="true"></ion-searchbar>
+  <div class="ion-text-end" *ngIf="mode === 'all'">
+    <ion-button class="squarebutton" >Only Critical patients</ion-button>
+  </div>
+</ion-header>
+
+<ion-content [fullscreen]="false">
+  <div id="container">
+    <ion-list class="list">
+      <ion-item *ngFor="let item of (patientData | async) | filter: nameFilter" (click)="openViewPages(item._id)">
+        <ion-label>
+          <h2>{{ item.first_name}} {{ item.last_name}}</h2>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

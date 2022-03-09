@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ titleMode }} medical data</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/searchpatientaddmedical"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only" name="save"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <div id="container">
+    <h3>Bill Russel Gates</h3>
+    <p>Day of Birth: January 30, 1995</p>
+    <p>Biological sex: male</p>
+    <hr class="solid">
+    <ion-list class="list ion-text-center" >
+      <ion-item class="iteminput">
+        <ion-label position="floating">Measuring Date</ion-label>
+        <ion-input name="measuringdate" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" inputmode="text" placeholder="YYYY-MM-DD" required="true"></ion-input>
+      </ion-item>
+      <ion-item class="iteminput">
+        <ion-label position="floating">Measuring Time</ion-label>
+        <ion-input name="measuringtime" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" inputmode="text" placeholder="HH:MM" required="true"></ion-input>
+      </ion-item>
+      <ion-item class="iteminput">
+        <ion-label position="floating">Systolic Blood Pressure</ion-label>
+        <ion-input name="systolic" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" inputmode="numeric" placeholder="in mmHg" required="false"></ion-input>
+      </ion-item>
+      <ion-item class="iteminput">
+        <ion-label position="floating">Diastolic Blood Pressure</ion-label>
+        <ion-input name="diastolic" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" inputmode="numeric" placeholder="in mmHg" required="false"></ion-input>
+      </ion-item>
+      <ion-item class="iteminput">
+        <ion-label position="floating">Respiratory Rate</ion-label>
+        <ion-input name="respiratory" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" inputmode="numeric" placeholder="in BPM" required="false"></ion-input>
+      </ion-item>
+      <ion-item class="iteminput">
+        <ion-label position="floating">Blood Oxygen Level</ion-label>
+        <ion-input name="oxygen" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" inputmode="decimal" placeholder="in %" required="false"></ion-input>
+      </ion-item>
+      <ion-item class="iteminput">
+        <ion-label position="floating">Heartbeat Rate</ion-label>
+        <ion-input name="heartbeat" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" inputmode="numeric" placeholder="in BPM" required="false"></ion-input>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

@@ -1,0 +1,64 @@
+#container {
+  text-align: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 18em;
+  transform: translateY(-50%);
+}
+
+.h3 {
+  font-size: 30px;
+  color: #3bb2bf;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.item {
+  --ion-item-background: #e6e6e6;
+  color: #000000;
+  margin: 8px;
+}
+
+.list {
+  margin-top: 0%;
+  background-color: #f0f3f3;
+}
+
+.searchbar {
+  --background: #ffffff;
+  --background-focused: #673ab7;
+  --background-hover: #673ab7;
+  --color: #000;
+  --color-activated: #000;
+  --color-focused: #000;
+  --vertical-align: middle;
+  border-radius: 55px;
+  border: 1px;
+  text-transform: none;
+  font-size: 14px;
+  width: 95%;
+}
+
+.squarebutton {
+  --background: #ffffff;
+  --background-focused: #673ab7;
+  --background-hover: #673ab7;
+  --color: #000;
+  --color-activated: #000;
+  --color-focused: #000;
+  --vertical-align: middle;
+  text-transform: none;
+  font-size: 14px;
+  margin-right: 2%;
+}
+
+.searchbar {
+  margin-top: 10px;
+  --background: #ffffff;
+  --color: #000;
+  --border-radius: 55px !important;
+  border: 1px;
+  font-size: 14px;
+  width: 95%;
+}

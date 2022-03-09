@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Add medical data</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <h3 class="h3">Search a patient</h3>
+  <ion-searchbar class="searchbar" placeholder="Search" [(ngModel)]="nameFilter" animated="true"></ion-searchbar>
+</ion-header>
+
+<ion-content [fullscreen]="false">
+  <div id="container">
+    <ion-list class="list">
+      <ion-item *ngFor="let item of (patientData | async) | filter: nameFilter" routerLink="/addeditpatientmedical/add/{{item._id}}/0">
+        <ion-label>
+          <h2>{{ item.first_name}} {{ item.last_name}}</h2>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

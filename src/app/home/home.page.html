@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Home
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,12 +9,26 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-title size="large">Home</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <p>Welcome To</p>
+    <h3>WeCare</h3>
+    <p>What do you want to do?</p>
+    <ion-row>
+      <ion-col size="12" class="ion-text-center">
+        <ion-button shape="round" class="button1" href="/listpatient/all">Check all patients</ion-button><br>
+        <ion-button shape="round" class="button1" href="/listpatient/critical">Check critical patients</ion-button><br>
+        <hr class="solid">
+        <ion-button shape="round" size="large" class="button2" href="/addeditpatientbasic/add/0">Add a new patient
+          <ion-icon slot="start" name="add-circle"></ion-icon>
+        </ion-button><br>
+        <ion-button shape="round" size="large" class="button2" href="/searchpatientaddmedical">Add medical data
+          <ion-icon slot="start" name="add-circle"></ion-icon>
+        </ion-button><br>
+      </ion-col>
+    </ion-row>
   </div>
 </ion-content>

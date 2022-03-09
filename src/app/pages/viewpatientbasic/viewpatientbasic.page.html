@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Patient Profile</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/listpatient/{{ parent }}" ></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only" name="trash"></ion-icon>
+      </ion-button>
+      <ion-button (click)="goEdit()">
+        <ion-icon slot="icon-only" name="create"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div id="container">
+    <h3>Bill Russel Gates</h3>
+    <ion-list class="list ion-text-center" >
+      <ion-item class="item">
+        <ion-label>Date of birth</ion-label>
+        <ion-label>1995-01-30</ion-label>
+      </ion-item>
+      <ion-item class="item">
+        <ion-label>Gender</ion-label>
+        <ion-label>male</ion-label>
+      </ion-item>
+
+      <hr class="solid">
+
+      <ion-item class="item">
+        <ion-label>Email</ion-label>
+        <ion-label>billgates@gmail.com</ion-label>
+      </ion-item>
+      <ion-item class="item">
+        <ion-label>Contact phone</ion-label>
+        <ion-label>416-093-2141</ion-label>
+      </ion-item>
+      <ion-item class="item">
+        <ion-label>REsidential address</ion-label>
+        <ion-label>123 william drive</ion-label>
+      </ion-item>
+
+      <hr class="solid">
+
+      <ion-item class="item">
+        <ion-label>Emergency contact</ion-label>
+        <ion-label>Molly</ion-label>
+      </ion-item>
+      <ion-item class="item">
+        <ion-label>Emergency phone</ion-label>
+        <ion-label>416-094-2115</ion-label>
+      </ion-item>
+      <ion-item class="item">
+        <ion-label>Relationship</ion-label>
+        <ion-label>Mother</ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ titleMode }} a patient</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only" name="save"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <div id="container">
+    <ion-list class="list ion-text-center" >
+      <ion-item class="iteminput">
+        <ion-label position="floating">First Name</ion-label>
+        <ion-input name="firstname" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" inputmode="text" placeholder="First Name" required="true"></ion-input>
+      </ion-item>
+      <ion-item class="iteminput">
+        <ion-label position="floating">Last Name</ion-label>
+        <ion-input name="lastname" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" inputmode="text" placeholder="Last Name" required="true"></ion-input>
+      </ion-item>
+
+      <hr class="solid">
+
+      <ion-item class="iteminput">
+        <ion-label position="floating">Date of Birth</ion-label>
+        <ion-input name="dateofbirth" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" inputmode="text" placeholder="YYYY-MM-DD" required="true"></ion-input>
+      </ion-item>
+      <ion-item class="iteminput">
+        <ion-label position="floating">Gender</ion-label>
+        <ion-input name="gender" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" inputmode="text" placeholder="male or female" required="true"></ion-input>
+      </ion-item>
+
+
+      <hr class="solid">
+
+      <ion-item class="iteminput">
+        <ion-label position="floating">Email</ion-label>
+        <ion-input name="email" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" inputmode="email" placeholder="Patient's email" required="false"></ion-input>
+      </ion-item>
+      <ion-item class="iteminput">
+        <ion-label position="floating">Contact Phone</ion-label>
+        <ion-input name="phone" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" inputmode="tel" placeholder="Patient's phone number" required="true"></ion-input>
+      </ion-item>
+      <ion-item class="iteminput">
+        <ion-label position="floating">Residential Address</ion-label>
+        <ion-input name="address" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" inputmode="text" placeholder="Patient's address" required="true"></ion-input>
+      </ion-item>
+
+      <hr class="solid">
+
+      <ion-item class="iteminput">
+        <ion-label position="floating">Emergency Contact</ion-label>
+        <ion-input name="emergencycontact" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" inputmode="text" placeholder="Contact Name" required="false"></ion-input>
+      </ion-item>
+      <ion-item class="iteminput">
+        <ion-label position="floating">Emergency Phone</ion-label>
+        <ion-input name="emergencyphone" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" inputmode="tel" placeholder="Phone number" required="false"></ion-input>
+      </ion-item>
+      <ion-item class="iteminput">
+        <ion-label position="floating">Relationship</ion-label>
+        <ion-input name="relationship" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" inputmode="text" placeholder="Relationship with the patient" required="false"></ion-input>
+      </ion-item>
+
+    </ion-list>
+  </div>
+</ion-content>
