@@ -7,14 +7,14 @@
   </ion-toolbar>
   <ion-searchbar class="searchbar" placeholder="Search" [(ngModel)]="nameFilter" animated="true"></ion-searchbar>
   <div class="ion-text-end" *ngIf="mode === 'all'">
-    <ion-button class="squarebutton" >Only Critical patients</ion-button>
+    <ion-button class="squarebutton" (click)="btnCriticalClick()" >Only Critical patients</ion-button>
   </div>
 </ion-header>
 
 <ion-content [fullscreen]="false">
   <div id="container">
     <ion-list class="list">
-      <ion-item *ngFor="let item of (patientData | async) | filter: nameFilter" (click)="openViewPages(item._id)">
+      <ion-item *ngFor="let item of listData | filter: nameFilter" (click)="openViewPages(item._id)">
         <ion-label>
           <h2>{{ item.first_name}} {{ item.last_name}}</h2>
         </ion-label>
