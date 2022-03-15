@@ -238,3 +238,24 @@
     --ion-card-background: #a6a6a6;
   }
 }
+
+.basic-alert {
+  --backdrop-opacity: 0.6;
+  --background: linear-gradient(90deg, #3bb2bf 1%, rgb(248, 255, 248) 100%);
+  .alert-title.sc-ion-alert-md,
+  .alert-title.sc-ion-alert-ios {
+    font-size: 16;
+    color: #000000;
+  }
+  .alert-message.sc-ion-alert-md,
+  .alert-message.sc-ion-alert-ios {
+    color: #000000;
+  }
+  .alert-button.sc-ion-alert-md,
+  .alert-button.sc-ion-alert-ios {
+    color: #000000;
+    background-color: #a6a6a6;
+    width: 100px;
+    border-radius: 2px;
+  }
+}

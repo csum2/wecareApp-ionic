@@ -3,8 +3,6 @@
   position: absolute;
   left: 0;
   right: 0;
-  top: 30em;
-  transform: translateY(-50%);
 }
 
 #container h3 {
@@ -32,6 +30,13 @@
   background-color: #f0f3f3;
 }
 
+.label {
+  color: #000000;
+  text-align: left;
+  font-size: 1.2em;
+  margin-left: 10px;
+}
+
 .iteminput {
   --ion-item-background: #e6e6e6;
   --background: #e6e6e6;
@@ -53,4 +58,8 @@
 
 ion-item.item-has-focus > ion-label {
   color: #3bb2bf !important;
+}
+
+.error {
+  color: #ff0404;
 }

@@ -5,7 +5,7 @@
       <ion-back-button defaultHref="/searchpatientaddmedical"></ion-back-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-button>
+      <ion-button (click)="documentEditForm.ngSubmit.emit()">
         <ion-icon slot="icon-only" name="save"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -14,40 +14,69 @@
 
 <ion-content [fullscreen]="true">
 
-  <div id="container">
-    <h3>Bill Russel Gates</h3>
-    <p>Day of Birth: January 30, 1995</p>
-    <p>Biological sex: male</p>
+  <div id="container" *ngIf="finishedLoading">
+    <h3>{{ patientData.first_name }} {{ patientData.last_name }}</h3>
+    <p>Day of Birth: {{ patientData.date_of_birth }}</p>
+    <p>Biological sex: {{ patientData.biological_sex }}</p>
     <hr class="solid">
-    <ion-list class="list ion-text-center" >
-      <ion-item class="iteminput">
-        <ion-label position="floating">Measuring Date</ion-label>
-        <ion-input name="measuringdate" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" inputmode="text" placeholder="YYYY-MM-DD" required="true"></ion-input>
-      </ion-item>
-      <ion-item class="iteminput">
-        <ion-label position="floating">Measuring Time</ion-label>
-        <ion-input name="measuringtime" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" inputmode="text" placeholder="HH:MM" required="true"></ion-input>
-      </ion-item>
-      <ion-item class="iteminput">
-        <ion-label position="floating">Systolic Blood Pressure</ion-label>
-        <ion-input name="systolic" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" inputmode="numeric" placeholder="in mmHg" required="false"></ion-input>
-      </ion-item>
-      <ion-item class="iteminput">
-        <ion-label position="floating">Diastolic Blood Pressure</ion-label>
-        <ion-input name="diastolic" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" inputmode="numeric" placeholder="in mmHg" required="false"></ion-input>
-      </ion-item>
-      <ion-item class="iteminput">
-        <ion-label position="floating">Respiratory Rate</ion-label>
-        <ion-input name="respiratory" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" inputmode="numeric" placeholder="in BPM" required="false"></ion-input>
-      </ion-item>
-      <ion-item class="iteminput">
-        <ion-label position="floating">Blood Oxygen Level</ion-label>
-        <ion-input name="oxygen" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" inputmode="decimal" placeholder="in %" required="false"></ion-input>
-      </ion-item>
-      <ion-item class="iteminput">
-        <ion-label position="floating">Heartbeat Rate</ion-label>
-        <ion-input name="heartbeat" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" inputmode="numeric" placeholder="in BPM" required="false"></ion-input>
-      </ion-item>
-    </ion-list>
+    <form [formGroup]="ionicForm" (ngSubmit)="submitForm()" #documentEditForm="ngForm" novalidate>
+      <ion-list class="list ion-text-center" >
+        <ion-item class="iteminput">
+          <ion-label position="floating">Measuring Date</ion-label>
+          <ion-input id="date" autocorrect="on" autofocus="on" [value]="defaultDate" inputmode="numeric" placeholder="YYYY-DD-MM" required="true" ></ion-input>
+          <ion-popover trigger="date" size="cover">
+            <ng-template>
+              <ion-datetime
+                displayFormat="YYYY-MM-DD"
+                presentation="date"
+                locale="en-CA"
+                formControlName="measuringdate"
+                (ionChange)="changeDateValue()"
+              ></ion-datetime>
+            </ng-template>
+          </ion-popover>
+        </ion-item>
+        <!-- Error messages -->
+        <span class="error" *ngIf="isSubmitted && errorControl.measuringdate.errors?.required">
+          Date is required.
+        </span>
+        <span class="error" *ngIf="isSubmitted && errorControl.measuringdate.errors?.pattern">
+          Please provide valid date in YYYY-MM-DD.
+        </span>
+
+        <ion-item class="iteminput">
+          <ion-label position="floating">Measuring Time</ion-label>
+          <ion-input formControlName="measuringtime" autocorrect="on" autofocus="on" [value]="defaultTime" inputmode="text" placeholder="HH:MM" required="true"></ion-input>
+        </ion-item>
+        <!-- Error messages -->
+        <span class="error" *ngIf="isSubmitted && errorControl.measuringtime.errors?.required">
+          Time is required.
+        </span>
+        <span class="error" *ngIf="isSubmitted && errorControl.measuringtime.errors?.pattern">
+          Please provide valid time in 24hours HH:MM.
+        </span>
+
+        <ion-item class="iteminput">
+          <ion-label position="floating">Systolic Blood Pressure</ion-label>
+          <ion-input formControlName="systolic" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" inputmode="numeric" placeholder="in mmHg" ></ion-input>
+        </ion-item>
+        <ion-item class="iteminput">
+          <ion-label position="floating">Diastolic Blood Pressure</ion-label>
+          <ion-input formControlName="diastolic" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" inputmode="numeric" placeholder="in mmHg" ></ion-input>
+        </ion-item>
+        <ion-item class="iteminput">
+          <ion-label position="floating">Respiratory Rate</ion-label>
+          <ion-input formControlName="respiratory" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" inputmode="numeric" placeholder="in BPM" ></ion-input>
+        </ion-item>
+        <ion-item class="iteminput">
+          <ion-label position="floating">Blood Oxygen Level</ion-label>
+          <ion-input formControlName="oxygen" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" inputmode="decimal" placeholder="in %" ></ion-input>
+        </ion-item>
+        <ion-item class="iteminput">
+          <ion-label position="floating">Heartbeat Rate</ion-label>
+          <ion-input formControlName="heartbeat" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" inputmode="numeric" placeholder="in BPM"></ion-input>
+        </ion-item>
+      </ion-list>
+    </form>
   </div>
 </ion-content>

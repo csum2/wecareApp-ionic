@@ -14,7 +14,7 @@
 <ion-content [fullscreen]="false">
   <div id="container">
     <ion-list class="list">
-      <ion-item *ngFor="let item of listData | filter: nameFilter" (click)="openViewPages(item._id)">
+      <ion-item *ngFor="let item of listData | filter: nameFilter" (click)="openViewPages(item._id, item.medicaldata)">
         <ion-label>
           <h2>{{ item.first_name}} {{ item.last_name}}</h2>
         </ion-label>

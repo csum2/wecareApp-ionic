@@ -1,9 +1,11 @@
+/* eslint-disable no-underscore-dangle */
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { RestService } from '../../services/rest.service';
 import { Observable } from 'rxjs';
 
 import { getLatestData } from 'src/app/components/utilities';
+import { MedicalData } from 'src/app/models/medicaldata';
 @Component({
   selector: 'app-listpatient',
   templateUrl: './listpatient.page.html',
@@ -24,17 +26,20 @@ export class ListpatientPage implements OnInit {
   }
 
   ngOnInit() {
-    this.patientData = this.restService.getPatientByName('');
-    this.patientData
-    .subscribe(respData => {
-      //console.log('ListpatientPage, respData: ' + JSON.stringify(respData));
-      this.criticalPatientData = this.filterCriticalPatients(respData);
-      if (this.mode === 'all') {
-        this.listData = respData;
-      } else {
-        this.listData = this.criticalPatientData;
-      }
-      //console.log('ListpatientPage, criticalPatientData: ' + JSON.stringify(this.criticalPatientData));
+    this.restService.showLoader().then(()=>{
+      this.patientData = this.restService.getPatientByName('');
+      this.patientData
+      .subscribe(respData => {
+        //console.log('ListpatientPage, respData: ' + JSON.stringify(respData));
+        this.criticalPatientData = this.filterCriticalPatients(respData);
+        if (this.mode === 'all') {
+          this.listData = respData;
+        } else {
+          this.listData = this.criticalPatientData;
+        }
+        this.restService.stopLoader();
+        //console.log('ListpatientPage, criticalPatientData: ' + JSON.stringify(this.criticalPatientData));
+      });
     });
   }
 
@@ -69,13 +74,14 @@ export class ListpatientPage implements OnInit {
     this.listData = this.criticalPatientData;
   }
 
-  openViewPages(inPid) {
+  openViewPages(inPid: string, medicaldata: MedicalData[]) {
     console.log('ListpatientPage, openViewPages(), pid: ' + inPid);
+    const recentData = getLatestData(medicaldata, 'sortkey');
     const navigationExtras: NavigationExtras = {
       state: {
         parent: this.mode,
         pid: inPid,
-        mid: '61b7a4e0aa1d6e001639cc7f'
+        mid: recentData ===null ? 0 : recentData._id
       }
     };
     this.router.navigate(['tabnav'], navigationExtras);

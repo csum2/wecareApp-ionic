@@ -3,8 +3,6 @@
   position: absolute;
   left: 0;
   right: 0;
-  top: 24em;
-  transform: translateY(-50%);
 }
 
 #container h3 {
@@ -51,4 +49,8 @@
 
 ion-item.item-has-focus > ion-label {
   color: #3bb2bf !important;
+}
+
+.error {
+  color: #ff0404;
 }

@@ -18,7 +18,12 @@ export class SearchpatientaddmedicalPage implements OnInit {
   }
 
   ngOnInit() {
-    this.patientData = this.restService.getPatientByName('');
+    this.restService.showLoader().then(()=>{
+      this.patientData = this.restService.getPatientByName('');
+      this.patientData.subscribe(respData => {
+          this.restService.stopLoader();
+        });
+    });
   }
 
 }

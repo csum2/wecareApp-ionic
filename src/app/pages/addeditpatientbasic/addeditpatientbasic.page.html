@@ -2,10 +2,10 @@
   <ion-toolbar>
     <ion-title>{{ titleMode }} a patient</ion-title>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/home"></ion-back-button>
+      <ion-back-button defaultHref="{{previousPage}}"></ion-back-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-button>
+      <ion-button (click)="documentEditForm.ngSubmit.emit()">
         <ion-icon slot="icon-only" name="save"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -14,59 +14,115 @@
 
 <ion-content [fullscreen]="true">
 
-  <div id="container">
-    <ion-list class="list ion-text-center" >
-      <ion-item class="iteminput">
-        <ion-label position="floating">First Name</ion-label>
-        <ion-input name="firstname" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" inputmode="text" placeholder="First Name" required="true"></ion-input>
-      </ion-item>
-      <ion-item class="iteminput">
-        <ion-label position="floating">Last Name</ion-label>
-        <ion-input name="lastname" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" inputmode="text" placeholder="Last Name" required="true"></ion-input>
-      </ion-item>
+  <div id="container" *ngIf="finishedLoading">
+    <form [formGroup]="ionicForm" (ngSubmit)="submitForm()" #documentEditForm="ngForm" novalidate>
+      <ion-list class="list ion-text-center" >
 
-      <hr class="solid">
-
-      <ion-item class="iteminput">
-        <ion-label position="floating">Date of Birth</ion-label>
-        <ion-input name="dateofbirth" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" inputmode="text" placeholder="YYYY-MM-DD" required="true"></ion-input>
-      </ion-item>
-      <ion-item class="iteminput">
-        <ion-label position="floating">Gender</ion-label>
-        <ion-input name="gender" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" inputmode="text" placeholder="male or female" required="true"></ion-input>
-      </ion-item>
-
-
-      <hr class="solid">
+        <ion-item class="iteminput">
+          <ion-label position="floating">First Name</ion-label>
+          <ion-input formControlName="firstname" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" inputmode="text" placeholder="First Name"></ion-input>
+        </ion-item>
+        <!-- Error messages -->
+        <span class="error" *ngIf="isSubmitted && errorControl.firstname.errors?.required">
+          First name is required.
+        </span>
 
       <ion-item class="iteminput">
-        <ion-label position="floating">Email</ion-label>
-        <ion-input name="email" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" inputmode="email" placeholder="Patient's email" required="false"></ion-input>
-      </ion-item>
-      <ion-item class="iteminput">
-        <ion-label position="floating">Contact Phone</ion-label>
-        <ion-input name="phone" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" inputmode="tel" placeholder="Patient's phone number" required="true"></ion-input>
-      </ion-item>
-      <ion-item class="iteminput">
-        <ion-label position="floating">Residential Address</ion-label>
-        <ion-input name="address" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" inputmode="text" placeholder="Patient's address" required="true"></ion-input>
-      </ion-item>
+          <ion-label position="floating">Last Name</ion-label>
+          <ion-input formControlName="lastname" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" inputmode="text" placeholder="Last Name"></ion-input>
+        </ion-item>
+        <!-- Error messages -->
+        <span class="error" *ngIf="isSubmitted && errorControl.lastname.errors?.required">
+          Last name is required.
+        </span>
 
-      <hr class="solid">
+        <ion-item class="iteminput">
+          <ion-label position="floating">Date of Birth</ion-label>
+          <ion-input id="date" autocorrect="on" autofocus="on" [value]="defaultDate" inputmode="numeric" placeholder="YYYY-DD-MM" required="true" ></ion-input>
+          <ion-popover trigger="date" size="cover">
+            <ng-template>
+              <ion-datetime
+                displayFormat="YYYY-MM-DD"
+                presentation="date"
+                locale="en-CA"
+                formControlName="dateofbirth"
+                (ionChange)="changeDateValue()"
+              ></ion-datetime>
+            </ng-template>
+          </ion-popover>
+        </ion-item>
+        <!-- Error messages -->
+        <span class="error" *ngIf="isSubmitted && errorControl.dateofbirth.errors?.required">
+          Date of birth is required.
+        </span>
+        <span class="error" *ngIf="isSubmitted && errorControl.dateofbirth.errors?.pattern">
+          Please provide valid date in YYYY-MM-DD.
+        </span>
 
-      <ion-item class="iteminput">
-        <ion-label position="floating">Emergency Contact</ion-label>
-        <ion-input name="emergencycontact" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" inputmode="text" placeholder="Contact Name" required="false"></ion-input>
-      </ion-item>
-      <ion-item class="iteminput">
-        <ion-label position="floating">Emergency Phone</ion-label>
-        <ion-input name="emergencyphone" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" inputmode="tel" placeholder="Phone number" required="false"></ion-input>
-      </ion-item>
-      <ion-item class="iteminput">
-        <ion-label position="floating">Relationship</ion-label>
-        <ion-input name="relationship" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" inputmode="text" placeholder="Relationship with the patient" required="false"></ion-input>
-      </ion-item>
+        <ion-radio-group formControlName="biologicalsex" lines="full" allow-empty-selection = "false" #radioGroup>
+          <ion-list-header>
+            <ion-label class="label">Gender</ion-label>
+          </ion-list-header>
+          <ion-item class="iteminput" >
+            <ion-label>Male</ion-label>
+            <ion-radio slot="start" value="male" ></ion-radio>
+          </ion-item>
+          <ion-item class="iteminput" >
+            <ion-label>Female</ion-label>
+            <ion-radio slot="start" value="female" ></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+        <!-- Error messages -->
+        <span class="error" *ngIf="isSubmitted && errorControl.biologicalsex.errors?.required">
+          Gender is required.
+        </span>
 
-    </ion-list>
+        <ion-item class="iteminput">
+          <ion-label position="floating">Email</ion-label>
+          <ion-input formControlName="email" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" inputmode="email" placeholder="Email"></ion-input>
+        </ion-item>
+        <!-- Error messages -->
+        <span class="error" *ngIf="isSubmitted && errorControl.email.errors?.required">
+          Email is required.
+        </span>
+        <span class="error" *ngIf="isSubmitted && errorControl.email.errors?.pattern">
+          Please provide valid email address
+        </span>
+
+        <ion-item class="iteminput">
+          <ion-label position="floating">Contact Phone</ion-label>
+          <ion-input formControlName="contactphone" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" inputmode="email" placeholder="Contact Phone"></ion-input>
+        </ion-item>
+        <!-- Error messages -->
+        <span class="error" *ngIf="isSubmitted && errorControl.contactphone.errors?.required">
+          Contact Phone is required.
+        </span>
+
+        <ion-item class="iteminput">
+          <ion-label position="floating">Residential Address</ion-label>
+          <ion-input formControlName="residentialaddress" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" inputmode="email" placeholder="Residential address"></ion-input>
+        </ion-item>
+        <!-- Error messages -->
+        <span class="error" *ngIf="isSubmitted && errorControl.residentialaddress.errors?.required">
+          Residential address is required.
+        </span>
+
+        <ion-item class="iteminput">
+          <ion-label position="floating">Emergency Contact</ion-label>
+          <ion-input formControlName="emergencycontact" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" inputmode="email" placeholder="Emergency contact name"></ion-input>
+        </ion-item>
+
+        <ion-item class="iteminput">
+          <ion-label position="floating">Emergency Contact Phone</ion-label>
+          <ion-input formControlName="emergencyphone" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" inputmode="email" placeholder="Emergency contact's phone"></ion-input>
+        </ion-item>
+
+        <ion-item class="iteminput">
+          <ion-label position="floating">Relationship</ion-label>
+          <ion-input formControlName="relationship" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" inputmode="email" placeholder="Relationship with the patient"></ion-input>
+        </ion-item>
+
+      </ion-list>
+    </form>
   </div>
 </ion-content>
