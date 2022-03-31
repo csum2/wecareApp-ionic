@@ -42,7 +42,7 @@ export class AddeditpatientbasicPage implements OnInit {
 
     this.defaultDate = getISODate(new Date());
     if (this.mode === 'add') {
-      this.previousPage = '\home';
+      this.previousPage = '/home';
     } else {
       this.previousPage = '/tabs/viewpatientbasic';
     }
@@ -107,7 +107,7 @@ export class AddeditpatientbasicPage implements OnInit {
     this.isSubmitted = true;
     console.log(this.ionicForm.value);
     if (!this.ionicForm.valid) {
-      console.log('AddeditpatientmedicalPage, submitForm(). Please provide all the required values!');
+      console.log('AddeditpatientbasicPage, submitForm(). Please provide all the required values!');
       return false;
     } else {
       console.log(this.ionicForm.value);
@@ -117,8 +117,8 @@ export class AddeditpatientbasicPage implements OnInit {
         this.restService.addPatient(httpData)
         .subscribe(
           resp => { console.log(resp); },
-          err => { console.log(err);
-            this.showAlertError(err);
+          err => { console.log('AddeditpatientbasicPage, http error' + JSON.stringify(err.message));
+          this.showAlertError(err);
           },
           () => { this.showAlertSuccess(); }
         );
@@ -168,7 +168,8 @@ export class AddeditpatientbasicPage implements OnInit {
       buttons: [{
         text: 'OK',
         handler: data => {
-          this.navCtrl.back();
+          //this.navCtrl.back();
+          this.navCtrl.navigateRoot('/home');
         }
       }]
     });
@@ -177,12 +178,12 @@ export class AddeditpatientbasicPage implements OnInit {
     console.log(result);
   }
 
-  async showAlertError(err: string) {
+  async showAlertError(err: any) {
     const alert = await this.alertCtrl.create({
       cssClass: 'basic-alert',
       header: 'WeCare',
       subHeader: 'Patient Data Saving Error',
-      message: err,
+      message: err.message,
       buttons: ['CONTINUE']
     });
     await alert.present();

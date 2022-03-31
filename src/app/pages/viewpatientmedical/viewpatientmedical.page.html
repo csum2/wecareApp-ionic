@@ -5,7 +5,7 @@
       <ion-back-button defaultHref="/listpatient/{{ parent }}" ></ion-back-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-button>
+      <ion-button (click)="deleteThis()">
         <ion-icon slot="icon-only" name="trash"></ion-icon>
       </ion-button>
       <ion-button (click)="goEdit()">
@@ -16,33 +16,38 @@
 </ion-header>
 
 <ion-content>
-  <div id="container">
-    <h3>Bill Russel Gates</h3>
-    <ion-list class="list ion-text-center" >
-      <ion-item class="item">
-        <ion-label>Measuring Date</ion-label>
-        <ion-label>2022-02-28</ion-label>
-      </ion-item>
-      <ion-item >
-        <ion-label>Measuring Time</ion-label>
-        <ion-label>10:14</ion-label>
-      </ion-item>
-      <ion-item >
-        <ion-label>Blood Pressure</ion-label>
-        <ion-label>120 / 88 mmHg</ion-label>
-      </ion-item>
-      <ion-item >
-        <ion-label>Respiratory Rate</ion-label>
-        <ion-label>44 / min</ion-label>
-      </ion-item>
-      <ion-item >
-        <ion-label>Blood Oxygen Level</ion-label>
-        <ion-label>100%</ion-label>
-      </ion-item>
-      <ion-item >
-        <ion-label>Heartbeat Rate</ion-label>
-        <ion-label>100/min</ion-label>
-      </ion-item>
-    </ion-list>
+  <div id="container" *ngIf="finishedLoading">
+    <h3>{{ patientData.first_name }}  {{ patientData.last_name }}</h3>
+    <ng-template [ngIf]="isMedicalDataFound" [ngIfElse]="noMedicalData">
+      <ion-list class="list ion-text-center" >
+        <ion-item class="item">
+          <ion-label>Measuring Date</ion-label>
+          <ion-label>{{ medicalDataLatest.measuring_date }}</ion-label>
+        </ion-item>
+        <ion-item >
+          <ion-label>Measuring Time</ion-label>
+          <ion-label>{{ medicalDataLatest.measuring_time }}</ion-label>
+        </ion-item>
+        <ion-item >
+          <ion-label>Blood Pressure</ion-label>
+          <ion-label>{{ medicalDataLatest.systolic_pressure }} / {{medicalDataLatest.diastolic_pressure}} mmHg</ion-label>
+        </ion-item>
+        <ion-item >
+          <ion-label>Respiratory Rate</ion-label>
+          <ion-label>{{ medicalDataLatest.respiratory_rate }} / minute</ion-label>
+        </ion-item>
+        <ion-item >
+          <ion-label>Blood Oxygen Level</ion-label>
+          <ion-label>{{ medicalDataLatest.oxygen_level }}%</ion-label>
+        </ion-item>
+        <ion-item >
+          <ion-label>Heartbeat Rate</ion-label>
+          <ion-label>{{ medicalDataLatest.heartbeat_rate }} / minute</ion-label>
+        </ion-item>
+      </ion-list>
+    </ng-template>
+    <ng-template #noMedicalData>
+      <h4> No medical data found for the patient.</h4>
+    </ng-template>
   </div>
 </ion-content>

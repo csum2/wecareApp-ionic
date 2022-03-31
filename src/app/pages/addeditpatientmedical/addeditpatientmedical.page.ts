@@ -113,7 +113,7 @@ export class AddeditpatientmedicalPage implements OnInit {
           this.restService.addMedicalDataById(this.pid, httpData)
           .subscribe(
             resp => { console.log(resp); },
-            err => { console.log(err);
+            err => { console.log('AddeditpatientmedicalPage, http error' + err);
               this.restService.stopLoader();
               this.showAlertError(err);
             },
@@ -173,7 +173,8 @@ export class AddeditpatientmedicalPage implements OnInit {
       buttons: [{
         text: 'OK',
         handler: data => {
-          this.navCtrl.back();
+          //this.navCtrl.back();
+          this.navCtrl.navigateRoot('/home');
         }
       }]
     });
@@ -182,12 +183,12 @@ export class AddeditpatientmedicalPage implements OnInit {
     console.log(result);
   }
 
-  async showAlertError(err: string) {
+  async showAlertError(err: any) {
     const alert = await this.alertCtrl.create({
       cssClass: 'basic-alert',
       header: 'WeCare',
       subHeader: 'Medical Data Saving Error',
-      message: err,
+      message: err.message,
       buttons: ['CONTINUE']
     });
     await alert.present();

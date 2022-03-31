@@ -3,8 +3,7 @@
   position: absolute;
   left: 0;
   right: 0;
-  top: 18em;
-  transform: translateY(-50%);
+  margin-top: 20px;
 }
 
 #container h3 {
@@ -37,7 +36,7 @@
 }
 
 #container .button1 {
-  --background: #ffffff;
+  --background: #e7e7e7;
   --background-focused: #673ab7;
   --background-hover: #673ab7;
   --color: #000;
@@ -50,7 +49,7 @@
 }
 
 #container .button2 {
-  --background: #ffffff;
+  --background: #e7e7e7;
   --background-focused: #673ab7;
   --background-hover: #673ab7;
   --color: #3bb2bf;

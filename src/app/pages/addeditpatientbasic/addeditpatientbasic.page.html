@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-title>{{ titleMode }} a patient</ion-title>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="{{previousPage}}"></ion-back-button>
+      <ion-back-button defaultHref="{{previousPage}}" ></ion-back-button>
     </ion-buttons>
     <ion-buttons slot="end">
       <ion-button (click)="documentEditForm.ngSubmit.emit()">
@@ -12,7 +12,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" mode="md">
 
   <div id="container" *ngIf="finishedLoading">
     <form [formGroup]="ionicForm" (ngSubmit)="submitForm()" #documentEditForm="ngForm" novalidate>
@@ -65,11 +65,11 @@
           </ion-list-header>
           <ion-item class="iteminput" >
             <ion-label>Male</ion-label>
-            <ion-radio slot="start" value="male" ></ion-radio>
+            <ion-radio slot="start" value="male" mode="ios"></ion-radio>
           </ion-item>
           <ion-item class="iteminput" >
             <ion-label>Female</ion-label>
-            <ion-radio slot="start" value="female" ></ion-radio>
+            <ion-radio slot="start" value="female" mode="ios"></ion-radio>
           </ion-item>
         </ion-radio-group>
         <!-- Error messages -->
