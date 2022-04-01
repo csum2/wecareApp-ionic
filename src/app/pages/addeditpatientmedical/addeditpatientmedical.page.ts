@@ -87,11 +87,11 @@ export class AddeditpatientmedicalPage implements OnInit {
         [Validators.required,
         Validators.pattern('([01][0-9]|2[0-3]):([0-5][0-9])')]
       ),
-      systolic : new FormControl(this.mode === 'add' ? '' : this.medicalDataLatest.systolic_pressure),
-      diastolic : new FormControl(this.mode === 'add' ? '' : this.medicalDataLatest.diastolic_pressure),
-      respiratory : new FormControl(this.mode === 'add' ? '' : this.medicalDataLatest.respiratory_rate),
-      oxygen : new FormControl(this.mode === 'add' ? '' : this.medicalDataLatest.oxygen_level),
-      heartbeat : new FormControl(this.mode === 'add' ? '' : this.medicalDataLatest.heartbeat_rate)
+      systolic : new FormControl(this.mode === 'add' ? '' : this.medicalDataLatest.systolic_pressure, [Validators.min(0)]),
+      diastolic : new FormControl(this.mode === 'add' ? '' : this.medicalDataLatest.diastolic_pressure, [Validators.min(0)]),
+      respiratory : new FormControl(this.mode === 'add' ? '' : this.medicalDataLatest.respiratory_rate, [Validators.min(0)]),
+      oxygen : new FormControl(this.mode === 'add' ? '' : this.medicalDataLatest.oxygen_level, [Validators.min(0), Validators.max(100)]),
+      heartbeat : new FormControl(this.mode === 'add' ? '' : this.medicalDataLatest.heartbeat_rate, [Validators.min(0), Validators.max(500)])
     });
   }
 
